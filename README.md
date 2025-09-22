@@ -207,6 +207,99 @@ ip add 8.8.8.8 255.255.255.255
 
 
 
+# This command is for the conection set up and automation as well
+
+
+
+AS2 
+enable
+configure terminal
+interface vlan 10
+ip address 192.168.10.5 255.255.255.0
+no shutdown
+
+ip default-gateway 192.168.10.3
+ip domain-name sundar.com
+crypto key generate rsa
+ip ssh version 2
+line vty 0 4
+  login local
+  transport input ssh
+exit
+username sundar privilege 15 password sundar
+end
+wr
+
+
+AS1
+enable
+configure terminal
+interface vlan 10
+ip address 192.168.10.6 255.255.255.0
+no shutdown
+
+ip default-gateway 192.168.10.3
+ip domain-name sundar.com
+crypto key generate rsa
+ip ssh version 2
+line vty 0 4
+  login local
+  transport input ssh
+exit
+username sundar privilege 15 password sundar
+end
+wr
+
+
+
+CS1
+enable
+configure terminal
+interface vlan 10
+ip address 192.168.10.7 255.255.255.0
+no shutdown
+
+ip default-gateway 192.168.10.3
+ip domain-name sundar.com
+crypto key generate rsa
+ip ssh version 2
+line vty 0 4
+  login local
+  transport input ssh
+exit
+username sundar privilege 15 password sundar
+end
+wr
+
+
+
+CS2
+enable
+configure terminal
+interface vlan 10
+ip address 192.168.10.8 255.255.255.0
+no shutdown
+
+ip default-gateway 192.168.10.3
+ip domain-name sundar.com
+crypto key generate rsa
+ip ssh version 2
+line vty 0 4
+  login local
+  transport input ssh
+exit
+username sundar privilege 15 password sundar
+end
+wr
+
+
+
+Automation for routing protocol:
+
+#source ~/ansible-venv/bin/activate
+#cd BGP
+
+#ansible-playbook -i invi-yml bgp.yml
 
 
 
